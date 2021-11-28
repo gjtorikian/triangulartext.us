@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+if [ "$RACK_ENV" = "production" ]; then
+  bundle exec puma -p 9110
+else
+  bundle exec rerun -- bundle exec puma -p 9110
+fi

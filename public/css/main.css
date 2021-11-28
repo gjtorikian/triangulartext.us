@@ -1,0 +1,82 @@
+p.content {
+  color: black;
+}
+
+div.holder {
+  padding-top: 3rem;
+}
+
+input[type="text"],
+span {
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.75rem;
+  border: 2px solid #666;
+}
+
+input[type="text"] {
+  width: 6em;
+
+  color: #555;
+  border-radius: 2em;
+  outline: 0;
+}
+
+input[type="text"]:focus {
+  border-color: hsl(329, 100%, 74%);
+}
+
+input[type="text"].entered {
+  border-color: hsl(329, 100%, 50%);
+}
+
+span {
+  position: absolute;
+  left: -9999px;
+  display: inline-block;
+  min-width: 6em;
+}
+
+.slide {
+  animation: fadeIn 2s;
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.lds-circle {
+  display: flex;
+  align-items: center;
+  display: inline-block;
+  transform: translateZ(1px);
+}
+.lds-circle > div {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  background: hsl(329, 100%, 50%);
+  animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes lds-circle {
+  0%,
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
