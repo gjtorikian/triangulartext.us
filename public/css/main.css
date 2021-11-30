@@ -36,6 +36,11 @@ span {
   min-width: 6em;
 }
 
+#pleaserotate-backdrop {
+  color: #000;
+  background-color: #ffffff;
+}
+
 .slide {
   animation: fadeIn 2s;
   opacity: 1;
