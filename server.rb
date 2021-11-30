@@ -59,15 +59,18 @@ class TriangularTextus < Sinatra::Base
 
     result = sequence(prompt)
 
-    { result: result[:text].force_encoding('UTF-8') }.to_json
+    { result: result[:text].force_encoding('UTF-8').gsub(/&nbsp;/, ' ') }.to_json
   end
 
   private def sequence(prompt, finish: false)
     parameters = parameters(prompt)
-    parameters[:logit_bias] = { '13': 5, # ensure a period exists
-                                '50256': 5, # ensure the text can end
-                                '4841': -100, # exclude weird ____________________
-                                '1427': -100 }
+
+    if finish
+      parameters[:logit_bias] = { '13': 5, # ensure a period exists
+                                  '50256': 5, # ensure the text can end
+                                  '4841': -100, # exclude weird ____________________
+                                  '1427': -100 }
+    end
 
     generated_sequences = OPENAI_CLIENT.completions(engine: 'curie', parameters: parameters)
     text = generated_sequences['choices'][0]['text']
