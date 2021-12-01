@@ -38,15 +38,11 @@ class TriangularTextus < Sinatra::Base
   end
 
   post '/submit' do
-    request.body.rewind
-    body = request.body.read
-    payload = JSON.parse(body)
+    payload = params['text'].to_s.strip
 
-    prompt = payload['text'].to_s.strip
+    session['prompt'] = payload
 
-    session['prompt'] = "#{prompt} "
-
-    {}.to_json
+    redirect '/complete'
   end
 
   get '/complete' do

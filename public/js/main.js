@@ -8,6 +8,7 @@ async function start() {
 
   if (nextButton) {
     nextButton.addEventListener("click", async (event) => {
+      event.preventDefault();
       let text = document
         .querySelector(visibleP)
         .innerText.replace(/\n(.+?)\n/g, "$1");
@@ -23,12 +24,15 @@ async function start() {
 }
 
 async function submitAndRedirect(text) {
-  await postData(`/submit`, {
-    text: text,
-    counter: counter,
-  });
+  let form = document.createElement("form");
+  form.action = "/submit";
+  form.method = "POST";
 
-  window.location.href = `/complete`;
+  form.innerHTML = `<input name="text" value="${text}">`;
+
+  document.body.append(form);
+
+  form.submit();
 }
 
 async function generateText() {
