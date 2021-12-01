@@ -48,11 +48,14 @@ class TriangularTextus < Sinatra::Base
   get '/complete' do
     redirect '/' if session['prompt'].nil?
 
-    erb :complete
+    erb :complete, locals: { prompt: session['prompt'] }
   end
 
   post '/generate' do
-    prompt = session['prompt']
+    request.body.rewind
+    body = request.body.read
+    payload = JSON.parse(body)
+    prompt = payload['prompt'].to_s.strip
 
     result = sequence(prompt)
 
@@ -70,6 +73,7 @@ class TriangularTextus < Sinatra::Base
     end
 
     generated_sequences = OPENAI_CLIENT.completions(engine: 'curie', parameters: parameters)
+
     text = generated_sequences['choices'][0]['text']
 
     if text.empty?

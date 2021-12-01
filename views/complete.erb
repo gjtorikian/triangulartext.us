@@ -2,12 +2,13 @@
   <div class="column is-three-fifths is-offset-one-fifth">
     <div id="spinner-holder" class="buttons is-centered">
       <div id="spinner" class="lds-circle">
-        <div></div>
+        <div>
+          <div id="prompt" class="is-hidden"><%= prompt %></div>
+        </div>
       </div>
       <h1 class="title">Generating story. . .</h1>
     </div>
-    <p id="text" class="content">
-    </p>
+    <p id="text" class="content"></p>
     <section id="again" class="section is-hidden">
       <div class="field buttons is-centered">
         <button id="next" class="button is-primary is-hovered">Again</button>

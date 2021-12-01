@@ -36,7 +36,8 @@ async function submitAndRedirect(text) {
 }
 
 async function generateText() {
-  let resultJson = await postData(`/generate`);
+  let prompt = document.getElementById("prompt").innerText;
+  let resultJson = await postData(`/generate`, { prompt: prompt });
   const text = resultJson.result;
 
   document.getElementById("text").innerHTML = text;
