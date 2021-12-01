@@ -11,6 +11,7 @@ rescue LoadError; end # rubocop:disable Lint/SuppressedException
 class TriangularTextus < Sinatra::Base
   set :root, File.dirname(__FILE__)
   enable :sessions
+  set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
 
   not_found do
     status 404
