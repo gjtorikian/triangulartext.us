@@ -24,7 +24,7 @@ class TriangularTextus < Sinatra::Base
     story.gsub(/\*\*\*/, '<input class="blank" type="text"><span class="spacer"></span>')
   end
 
-  MAX_LENGTH = 2000
+  MAX_LENGTH = 200
   TEMPERATURE = 0.9
   # TOP_K = 9
   TOP_P = 1.0
@@ -95,7 +95,7 @@ class TriangularTextus < Sinatra::Base
   end
 
   private def parameters(prompt)
-    { prompt: prompt, max_tokens: MAX_LENGTH - (prompt.length / 4), temperature: TEMPERATURE, top_p: TOP_P,
+    { prompt: prompt, max_tokens: MAX_LENGTH, temperature: TEMPERATURE, top_p: TOP_P,
       frequency_penalty: FREQUENCY_PENALTY, n: 1 }
   end
 end
